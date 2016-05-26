@@ -2,3 +2,4 @@
 %project=osm_load
 %uri=https://activimetrics.com/jmarca/osm_load
 
+appschema 2016-05-26T16:07:28Z James E. Marca <james@activimetrics.com> # Add schema for OSM data.
