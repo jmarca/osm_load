@@ -3,3 +3,7 @@
 %uri=https://activimetrics.com/jmarca/osm_load
 
 appschema 2016-05-26T16:07:28Z James E. Marca <james@activimetrics.com> # Add schema for OSM data.
+pgsnapshot_schema [calvad_db_geoextensions:geoextensions appschema] 2016-06-01T22:09:30Z James E. Marca <james@activimetrics.com> # add pgsnapshot_schema 0.6
+pgsnapshot_schema_action [pgsnapshot_schema] 2016-06-02T16:05:25Z James E. Marca <james@activimetrics.com> # add pgsnapshot_schema_action 0.6
+pgsnapshot_schema_bbox [pgsnapshot_schema] 2016-06-02T17:24:50Z James E. Marca <james@activimetrics.com> # add pgsnapshot_schema_bbox 0.6
+pgsnapshot_schema_linestring [pgsnapshot_schema] 2016-06-02T17:33:18Z James E. Marca <james@activimetrics.com> # add pgsnapshot_schema_linestring 0.6

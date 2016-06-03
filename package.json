@@ -1,15 +1,27 @@
 {
-  "name": "osm_load",
+    "name": "osm_load",
+    "config" : {
+        "osmosis_binary" : "osmosis",
+        "output_dir":"/var/tmp/osmosis_data/part/deux"
+    },
   "version": "1.0.0",
   "description": "Load OSM data (California) into a local database",
   "main": "load.js",
   "scripts": {
-    "test": "mocha"
+      "test": "tap test/*.js",
+      "download": "npm run download:pbfclean -s  && npm run download:pbfget",
+      "download:pbfclean":"if [ -d binaries -a -d binaries/osm ]; then find ./binaries/osm -name california-latest.osm.pbf -mtime +30 -delete; fi",
+      "download:pbfdir":"mkdir -p binaries/osm",
+      "download:pbfget":"npm run download:pbfdir -s && if [ ! -e binaries/osm/california-latest.osm.pbf ]; then curl http://download.geofabrik.de/north-america/us/california-latest.osm.pbf -o binaries/osm/california-latest.osm.pbf; fi ",
+      "load:osmosis":"npm run download && ./osm_load.sh "
   },
   "repository": {
     "type": "git",
     "url": "git@activimetrics.com:a/jmarca/osm_load"
   },
   "author": "James E. Marca",
-  "license": "GPL-2.0"
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "tap": "^5.7.2"
+  }
 }
