@@ -7,3 +7,4 @@ pgsnapshot_schema [calvad_db_geoextensions:geoextensions appschema] 2016-06-01T2
 pgsnapshot_schema_action [pgsnapshot_schema] 2016-06-02T16:05:25Z James E. Marca <james@activimetrics.com> # add pgsnapshot_schema_action 0.6
 pgsnapshot_schema_bbox [pgsnapshot_schema] 2016-06-02T17:24:50Z James E. Marca <james@activimetrics.com> # add pgsnapshot_schema_bbox 0.6
 pgsnapshot_schema_linestring [pgsnapshot_schema] 2016-06-02T17:33:18Z James E. Marca <james@activimetrics.com> # add pgsnapshot_schema_linestring 0.6
+pgsnapshot_load [pgsnapshot_schema_linestring pgsnapshot_schema_bbox pgsnapshot_schema_action pgsnapshot_schema] 2016-06-06T23:35:02Z James E. Marca <james@activimetrics.com> # load the osm data processed by osmosis
