@@ -57,23 +57,46 @@ export OSMOSIS_DIR='/path/to/osmosis/dir'
 createdb -U ${PSQL_USER} osm
 ```
 
+## Configure sqitch
+
+This project and its dependencies use sqitch.
+
+Configure sqitch as follows.  Note that you may have to specify a full
+db URI as described [here](https://github.com/theory/uri-db/):
+
+```
+sqitch target add osm db:pg:osm
+sqitch engine add pg osmt
+```
+
+Then export the local sqitch file for use in dependencies:
+
+
+```
+export SQITCH_CONFIG=~+/sqitch.conf
+```
+
 ## Geo stuff
 
 Then use sqitch to add the geo stuff.
 
 
 ```
-cd {where you stashed the repo for calvad_db_geoextensions}
-sqitch deploy db:pg:osm
+npm install calvad_db_geoextensions
 
 ```
 
 ## Deploy Osmosis
 
-Then load up the databse rules and regs.  This is not handled with
-sqitch yet.  Pop into the sql command line, set the default schema to
-osm, and source the osmosis scripts.
+Then load up the databse rules and regs.  This can now be done using
+sqitch via npm run scripts.
 
+```
+npm deploy:schema
+```
+
+
+That takes the place of the following:
 
 ```
 
@@ -87,11 +110,6 @@ SET search_path TO osm,public;
 \i /home/james/repos/OSM_related/osmosis/package/script/pgsnapshot_schema_0.6_linestring.sql
 ```
 
-### Nota Bena
-
-That above is a hack.  You can't just cut and paste.  Make sure the
-paths are correct, etc.
-
 
 ## Parse and process the OSM snapshot with osmosis
 
@@ -100,14 +118,17 @@ Next parse the osm.pbf file
 I like to use a directory with lots of space to store temp files and
 such.
 
+The output directory is set with the package.json file variable
+npm_package_config_output_dir: or else will default to
+"/tmp/omosis_output".
+
 ```
-wget http://download.geofabrik.de/north-america/us/california-latest.osm.pbf
-export OSMOSIS_FILE=california-latest.osm.pbf
+npm run load:osmosis
 ```
 
-
-Then run osmosis on the file to create a set of sql files that will
-generate the osm database using \copy commands.
+That will download the OSM California snapshot if necessary, and then
+process the pbf file using osmosis to make a series of PostgreSQL copy
+statements to load the data.
 
 
 ```
@@ -124,12 +145,6 @@ export OSMOSIS_DATA=/var/tmp/osmosis_data
  		    enableLinestringBuilder=true \
  		    nodeLocationStoreType=CompactTempFile
 ```
-
-The -bb (bounding box) line is included because it forces osmosis to
-clean up some inconsistencies that appear sometimes in the dumps.
-The `write-pgsql-dump` command creates a set of files in
-`${OSMOSIS_DATA}` that will populate the database tables.
-
 
 You will see a lot of dumping output, and then a big pause after the
 message
