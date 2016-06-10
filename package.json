@@ -2,21 +2,21 @@
   "name": "osm_load",
   "config": {
     "osmosis_binary": "osmosis",
-      "output_dir": "/var/tmp/osmosis_data/part/deux",
+      "output_dir": "/var/tmp/osmosis_data",
       "targetdb":"db:pg:osmtest"
   },
   "version": "1.0.0",
   "description": "Load OSM data (California) into a local database",
   "main": "load.js",
   "scripts": {
-    "test": "tap test/*.js",
-    "download": "npm run download:pbfclean -s  && npm run download:pbfget",
-    "download:pbfclean": "if [ -d binaries -a -d binaries/osm ]; then find ./binaries/osm -name california-latest.osm.pbf -mtime +30 -delete; fi",
-    "download:pbfdir": "mkdir -p binaries/osm",
-    "download:pbfget": "npm run download:pbfdir -s && if [ ! -e binaries/osm/california-latest.osm.pbf ]; then curl http://download.geofabrik.de/north-america/us/california-latest.osm.pbf -o binaries/osm/california-latest.osm.pbf; fi ",
-    "load:osmosis": "npm run download && ./osm_load.sh ",
+      "test": "tap test/*.js",
+      "download": "npm run download:pbfclean -s  && npm run download:pbfget",
+      "download:pbfclean": "if [ -d binaries -a -d binaries/osm ]; then find ./binaries/osm -name california-latest.osm.pbf -mtime +30 -delete; fi",
+      "download:pbfdir": "mkdir -p binaries/osm",
+      "download:pbfget": "npm run download:pbfdir -s && if [ ! -e binaries/osm/california-latest.osm.pbf ]; then curl http://download.geofabrik.de/north-america/us/california-latest.osm.pbf -o binaries/osm/california-latest.osm.pbf; fi ",
+      "load:osmosis": "npm run download && ./osmosis_parse.sh ",
       "deploy:schema": "SQITCH_DB_URI=${SQITCH_DB_URI:-`sqitch  config --local --get-regexp 'uri' 'pg' | cut -f 2 -d =`} npm install calvad_db_geoextensions && sqitch deploy --to pgsnapshot_schema_linestring",
-      "deploy:data": "sqitch deploy"
+      "deploy:data": "./osm_load.sh"
   },
   "repository": {
     "type": "git",

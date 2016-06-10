@@ -22,6 +22,13 @@ DROP INDEX idx_relation_members_member_id_and_type;
 DROP INDEX idx_ways_bbox;
 DROP INDEX idx_ways_linestring;
 
+TRUNCATE TABLE users CASCADE;
+TRUNCATE TABLE nodes CASCADE;
+TRUNCATE TABLE ways CASCADE;
+TRUNCATE TABLE way_nodes CASCADE;
+TRUNCATE TABLE relations CASCADE;
+TRUNCATE TABLE relation_members CASCADE;
+
 -- Uncomment these out if bbox or linestring columns are needed and the COPY
 -- files do not include them. If you want these columns you should use the
 -- enableBboxBuilder or enableLinestringBuilder options to --write-pgsql-dump
@@ -31,12 +38,12 @@ DROP INDEX idx_ways_linestring;
 SELECT DropGeometryColumn('ways', 'linestring');*/
 
 -- Import the table data from the data files using the fast COPY method.
-\copy users FROM 'users.txt'
-\copy nodes FROM 'nodes.txt'
-\copy ways FROM 'ways.txt'
-\copy way_nodes FROM 'way_nodes.txt'
-\copy relations FROM 'relations.txt'
-\copy relation_members FROM 'relation_members.txt'
+\copy users FROM './binaries/osm/users.txt'
+\copy nodes FROM './binaries/osm/nodes.txt'
+\copy ways FROM './binaries/osm/ways.txt'
+\copy way_nodes FROM './binaries/osm/way_nodes.txt'
+\copy relations FROM './binaries/osm/relations.txt'
+\copy relation_members FROM './binaries/osm/relation_members.txt'
 
 -- Add the primary keys and indexes back again (except the way bbox index).
 ALTER TABLE ONLY nodes ADD CONSTRAINT pk_nodes PRIMARY KEY (id);
@@ -79,17 +86,17 @@ CREATE INDEX idx_ways_linestring ON ways USING gist (linestring);
 ALTER TABLE ONLY ways CLUSTER ON idx_ways_bbox;
 ALTER TABLE ONLY ways CLUSTER ON idx_ways_linestring;
 
+
+
+COMMIT;
+
 -- Optional: CLUSTER imported tables. CLUSTER takes a significant amount of time to run and a
 -- significant amount of free disk space but speeds up some queries.
 
-CLUSTER nodes;
-CLUSTER ways;
+-- CLUSTER nodes;
+-- CLUSTER ways;
 
 -- It is not necessary to CLUSTER way_nodes or relation_members after the initial load but you might want to do so later on
 
 -- Perform database maintenance due to large database changes.
-ANALYZE;
-
-
-
-COMMIT;
+-- ANALYZE;
