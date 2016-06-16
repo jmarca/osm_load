@@ -19,7 +19,7 @@ from osm.users
 
 -- nodes
 
-select id, version, user_id, tstamp, changeset_id, hstore, geom
+select id, version, user_id, tstamp, changeset_id, tags, geom
 from osm.nodes
 where false;
 
