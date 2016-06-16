@@ -39,7 +39,7 @@ from osm.ways
 
 -- way_nodes
 
-select wa_id,node_id,sequence_id
+select way_id,node_id,sequence_id
 from osm.way_nodes
 where false;
 
