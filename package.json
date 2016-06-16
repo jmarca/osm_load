@@ -1,9 +1,15 @@
 {
   "name": "osm_load",
   "config": {
-    "osmosis_binary": "osmosis",
+      "osmosis_binary": "osmosis",
       "output_dir": "/var/tmp/osmosis_data",
-      "targetdb":"db:pg:osmtest"
+      "targetdb":"db:pg:osmtest",
+      "src_db":"spatialvds",
+      "src_host":"activimetrics.com",
+      "src_user":"slash",
+      "tgt_db":"osm",
+      "tgt_host":"127.0.0.1",
+      "tgt_user":"slash"
   },
   "version": "1.0.0",
   "description": "Load OSM data (California) into a local database",

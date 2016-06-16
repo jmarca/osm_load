@@ -66,7 +66,7 @@ db URI as described [here](https://github.com/theory/uri-db/):
 
 ```
 sqitch target add osm db:pg:osm
-sqitch engine add pg osmt
+sqitch engine add pg osm
 ```
 
 Then export the local sqitch file for use in dependencies:
