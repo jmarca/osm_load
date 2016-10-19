@@ -48,6 +48,8 @@ ogr2ogr -f PostgreSQL PG:'dbname=hpms_geocode user=${PG_USER}' \
 
 Download osmosis and install it.  That is beyond the scope of this
 write up.
+See
+[the OSM wiki page](http://wiki.openstreetmap.org/wiki/Osmosis/Installation).
 
 ## Create a db
 
