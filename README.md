@@ -12,7 +12,7 @@ In order to download the latest pbf file for california, run the npm
 run script called build
 
 ```
-npm run build
+npm run download
 ```
 
 If that works, then it will download the latest california snapshot
