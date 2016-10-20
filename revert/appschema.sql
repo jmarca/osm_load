@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP schema osm;
+DROP schema osm cascade;
 
 COMMIT;

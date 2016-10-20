@@ -8,18 +8,18 @@ SET search_path to osm,public;
 
 -- Database creation script for the snapshot PostgreSQL schema.
 
--- Drop all tables if they exist.
-DROP TABLE IF EXISTS actions;
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS nodes;
-DROP TABLE IF EXISTS ways;
-DROP TABLE IF EXISTS way_nodes;
-DROP TABLE IF EXISTS relations;
-DROP TABLE IF EXISTS relation_members;
-DROP TABLE IF EXISTS schema_info;
+-- -- Drop all tables if they exist.
+-- DROP TABLE IF EXISTS actions;
+-- DROP TABLE IF EXISTS users;
+-- DROP TABLE IF EXISTS nodes;
+-- DROP TABLE IF EXISTS ways;
+-- DROP TABLE IF EXISTS way_nodes;
+-- DROP TABLE IF EXISTS relations;
+-- DROP TABLE IF EXISTS relation_members;
+-- DROP TABLE IF EXISTS schema_info;
 
 -- Drop all stored procedures if they exist.
-DROP FUNCTION IF EXISTS osmosisUpdate();
+--DROP FUNCTION IF EXISTS osmosisUpdate();
 
 
 -- Create a table which will contain a single row defining the current schema version.
