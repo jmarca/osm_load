@@ -7,9 +7,5 @@ select data_type,action,id
 from osm.actions
 where false;
 
-select 1/count(*)
-from osm.actions
-;
-
 
 ROLLBACK;
