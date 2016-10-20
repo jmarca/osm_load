@@ -2,6 +2,9 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+SET search_path to osm,public;
+
+drop index idx_ways_linestring;
+alter table ways drop column linestring;
 
 COMMIT;
